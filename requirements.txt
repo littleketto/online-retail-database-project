@@ -1,0 +1,11 @@
+# Web Framework
+Flask>=3.0.0
+
+# PostgreSQL Database Driver (Raw SQL execution - No ORM)
+psycopg2-binary>=2.9.9
+
+# Excel Dataset Parser (For seeding Online Retail II data)
+openpyxl>=3.1.2
+
+# Environment Variables Management
+python-dotenv>=1.0.0
