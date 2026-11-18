@@ -11,7 +11,7 @@
 - [x] **01.** `chore: initialize repository with .gitignore and README` (`b6219c8` - `littleketto`)
 - [x] **02.** `build: configure requirements.txt with Flask, psycopg2-binary and openpyxl` (`6628168` - `littleketto`)
 - [x] **03.** `docs: add shared implementation plan, commit tracker and agent guide` *(Completed)*
-- [ ] **04.** `build(docker): add docker-compose.yml for PostgreSQL 16 and pgAdmin`
+- [x] **04.** `build(docker): add docker-compose.yml for PostgreSQL 16 and pgAdmin`
 - [ ] **05.** `config: implement database configuration and environment variables loader`
 - [ ] **06.** `feat(db): implement connection pool and raw SQL query execution helper`
 - [ ] **07.** `feat(db): add transaction context manager for atomic multi-query execution`
