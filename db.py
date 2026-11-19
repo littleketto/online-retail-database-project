@@ -66,3 +66,16 @@ def execute_query(query: str, params=None, returning: bool = False):
         except Exception:
             conn.rollback()
             raise
+
+
+@contextmanager
+def transaction():
+    """Provide a transactional scope around a series of database operations."""
+    with get_connection() as conn:
+        try:
+            with conn.cursor(cursor_factory=RealDictCursor) as cur:
+                yield cur
+            conn.commit()
+        except Exception:
+            conn.rollback()
+            raise

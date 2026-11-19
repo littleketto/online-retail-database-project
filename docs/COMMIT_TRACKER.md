@@ -14,7 +14,7 @@
 - [x] **04.** `build(docker): add docker-compose.yml for PostgreSQL 16 and pgAdmin`
 - [x] **05.** `config: implement database configuration and environment variables loader`
 - [x] **06.** `feat(db): implement connection pool and raw SQL query execution helper`
-- [ ] **07.** `feat(db): add transaction context manager for atomic multi-query execution`
+- [x] **07.** `feat(db): add transaction context manager for atomic multi-query execution`
 - [ ] **08.** `feat(schema): create DDL script for customers and orders tables`
 - [ ] **09.** `feat(schema): create DDL script for categories, products and order_items tables`
 - [ ] **10.** `feat(schema): create DDL script for shipments, reviews, audit_logs and indexes`
