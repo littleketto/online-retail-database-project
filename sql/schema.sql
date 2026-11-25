@@ -27,3 +27,52 @@ CREATE TABLE IF NOT EXISTS orders (
     shipping_address  TEXT           NOT NULL,
     total_amount      NUMERIC(10, 2) NOT NULL DEFAULT 0.00
 );
+
+-- Member 3: suppliers (required before products, which references it)
+
+CREATE TABLE IF NOT EXISTS suppliers (
+    supplier_id     SERIAL PRIMARY KEY,
+    company_name    VARCHAR(120) NOT NULL UNIQUE,
+    contact_name    VARCHAR(80)  NOT NULL,
+    contact_email   VARCHAR(120) NOT NULL UNIQUE,
+    contact_phone   VARCHAR(30),
+    country         VARCHAR(60)  NOT NULL,
+    lead_time_days  INTEGER      NOT NULL DEFAULT 7 CHECK (lead_time_days >= 0)
+);
+
+-- Member 2: categories & products
+
+CREATE TABLE IF NOT EXISTS categories (
+    category_id    SERIAL PRIMARY KEY,
+    category_name  VARCHAR(60)  NOT NULL UNIQUE,
+    description    TEXT,
+    department     VARCHAR(50)  NOT NULL,
+    tax_rate       NUMERIC(4, 2) NOT NULL DEFAULT 0.18,
+    display_order  INTEGER      NOT NULL DEFAULT 0,
+    is_active      BOOLEAN      NOT NULL DEFAULT TRUE
+);
+
+CREATE TABLE IF NOT EXISTS products (
+    product_id      SERIAL PRIMARY KEY,
+    category_id     INTEGER        NOT NULL REFERENCES categories(category_id) ON DELETE RESTRICT,
+    supplier_id     INTEGER        NOT NULL REFERENCES suppliers(supplier_id) ON DELETE RESTRICT,
+    stock_code      VARCHAR(30)    NOT NULL UNIQUE,
+    product_name    VARCHAR(150)   NOT NULL,
+    description     TEXT,
+    unit_price      NUMERIC(10, 2) NOT NULL CHECK (unit_price >= 0),
+    stock_quantity  INTEGER        NOT NULL DEFAULT 0 CHECK (stock_quantity >= 0),
+    image_filename  VARCHAR(255)
+);
+
+-- Member 4: order_items
+
+CREATE TABLE IF NOT EXISTS order_items (
+    item_id        SERIAL PRIMARY KEY,
+    order_id       INTEGER        NOT NULL REFERENCES orders(order_id) ON DELETE CASCADE,
+    product_id     INTEGER        NOT NULL REFERENCES products(product_id) ON DELETE RESTRICT,
+    quantity       INTEGER        NOT NULL CHECK (quantity > 0),
+    unit_price     NUMERIC(10, 2) NOT NULL CHECK (unit_price >= 0),
+    discount_rate  NUMERIC(4, 2)  NOT NULL DEFAULT 0.00,
+    line_total     NUMERIC(10, 2) NOT NULL,
+    item_notes     TEXT
+);
